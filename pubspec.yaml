@@ -1,4 +1,4 @@
-name: moor_test
+name: budget_app
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -17,8 +17,10 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  provider: ^3.0.0+1
   flutter:
     sdk: flutter
+  moor_flutter: ^1.7.0  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -27,6 +29,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  moor_generator: ^1.7.1
+  build_runner: 
 
 
 # For information on the generic Dart part of this file, see the
@@ -56,10 +60,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+     - family: Aleo Light
+       fonts:
+         - asset: assets/fonts/aleo-light-webfont.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
