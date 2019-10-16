@@ -6,7 +6,7 @@ part of 'data.dart';
 // MoorGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class Bill extends DataClass implements Insertable<Bill> {
   final int id;
   final String comment;
@@ -39,13 +39,13 @@ class Bill extends DataClass implements Insertable<Bill> {
   }
 
   @override
-  T createCompanion<T extends UpdateCompanion<Bill>>(bool nullToAbsent) {
+  BillsCompanion createCompanion(bool nullToAbsent) {
     return BillsCompanion(
       id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       comment: comment == null && nullToAbsent
           ? const Value.absent()
           : Value(comment),
-    ) as T;
+    );
   }
 
   Bill copyWith({int id, String comment}) => Bill(
@@ -66,7 +66,7 @@ class Bill extends DataClass implements Insertable<Bill> {
   @override
   bool operator ==(other) =>
       identical(this, other) ||
-      (other is Bill && other.id == id && other.comment == comment);
+      (other is Bill && other.id == this.id && other.comment == this.comment);
 }
 
 class BillsCompanion extends UpdateCompanion<Bill> {
@@ -76,6 +76,10 @@ class BillsCompanion extends UpdateCompanion<Bill> {
     this.id = const Value.absent(),
     this.comment = const Value.absent(),
   });
+  BillsCompanion.insert({
+    this.id = const Value.absent(),
+    @required String comment,
+  }) : comment = Value(comment);
   BillsCompanion copyWith({Value<int> id, Value<String> comment}) {
     return BillsCompanion(
       id: id ?? this.id,
@@ -159,7 +163,7 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
 }
 
 abstract class _$AppDatabase extends GeneratedDatabase {
-  _$AppDatabase(QueryExecutor e) : super(const SqlTypeSystem.withDefaults(), e);
+  _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $BillsTable _bills;
   $BillsTable get bills => _bills ??= $BillsTable(this);
   @override

@@ -22,4 +22,5 @@ class AppDatabase extends _$AppDatabase {
     // tutaj bills jest akceptowane i nie jest randomową nazwą, gdyż to jest alias to table name który jest generowany automatycznie w data.g.dart
      Stream<List<Bill>> watchAllBills() => select(bills).watch();
      Future insertNewBill(Bill bill) => into(bills).insert(bill);
+     Future deleteBill(Bill bill) => delete(bills).delete(bill);
 }
